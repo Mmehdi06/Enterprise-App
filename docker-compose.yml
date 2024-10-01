@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: EnterpriseApp       # Name of the database
+      POSTGRES_USER: admin         # Database username
+      POSTGRES_PASSWORD: password # Database password
+    ports:
+      - "5432:5432"                 # Expose PostgreSQL on port 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persist data in a Docker volume
+
+volumes:
+  pgdata:                                 # Define the volume for PostgreSQL data
