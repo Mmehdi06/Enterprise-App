@@ -1,4 +1,4 @@
-package be.ehb.enterpriseapp.models.enums;
+package be.ehb.enterpriseapp.auth.enums;
 
 public enum UserRole {
     STUDENT,

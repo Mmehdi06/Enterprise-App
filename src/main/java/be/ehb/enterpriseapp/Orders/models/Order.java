@@ -1,6 +1,8 @@
-package be.ehb.enterpriseapp.models;
+package be.ehb.enterpriseapp.Orders.models;
 
-import be.ehb.enterpriseapp.models.enums.OrderStatus;
+import be.ehb.enterpriseapp.Orders.enums.OrderStatus;
+import be.ehb.enterpriseapp.auth.models.User;
+import be.ehb.enterpriseapp.products.models.Product;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,6 +15,17 @@ public class Order {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @ManyToOne
+    private User user;
+    
+    @ManyToMany
+    private List< Product > products;
+    
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private OrderStatus orderStatus; // PENDING, ACCEPTED, REJECTED, DELIVERED
+    
     
     public Long getId ( ) {
         return id;
@@ -62,14 +75,6 @@ public class Order {
         this.orderStatus = orderStatus;
     }
     
-    @ManyToOne
-    private User user;
     
-    @ManyToMany
-    private List<Product> products;
-    
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private OrderStatus orderStatus; // PENDING, ACCEPTED, REJECTED, DELIVERED
 }
 

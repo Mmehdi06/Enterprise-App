@@ -1,4 +1,4 @@
-package be.ehb.enterpriseapp.models.enums;
+package be.ehb.enterpriseapp.Orders.enums;
 
 public enum OrderStatus {
     PENDING,
