@@ -1,11 +1,15 @@
 package be.ehb.enterpriseapp;
 
+import be.ehb.enterpriseapp.auth.enums.UserRole;
+import be.ehb.enterpriseapp.auth.models.User;
+import be.ehb.enterpriseapp.auth.repositories.UserRepository;
 import be.ehb.enterpriseapp.products.models.Product;
 import be.ehb.enterpriseapp.products.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -18,7 +22,7 @@ public class Application {
     }
     
     @Bean
-    CommandLineRunner seedDatabase(ProductRepository productRepository) {
+    CommandLineRunner seedDatabase(ProductRepository productRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             // Check if the database already has products
             if (productRepository.count() == 0) {
@@ -34,6 +38,12 @@ public class Application {
                         new Product("Bose SoundLink Revolve Speaker", "Portable Bluetooth speaker delivering 360-degree sound.", "Electronics", 199.99, true),
                         new Product("Instant Pot Duo 7-in-1", "Multifunctional pressure cooker for cooking, steaming, and sautéing.", "Home Appliances", 99.99, true)
                 ) );
+            }
+            if (userRepository.count() == 0) {
+                userRepository.saveAll( List.of(
+                        new User("mehdi@mehdi.com", passwordEncoder.encode("Password123"), UserRole.STUDENT ),
+                        new User("admin@admin.com", passwordEncoder.encode("Password123"), UserRole.ADMIN )
+                ));
             }
         };
     }
