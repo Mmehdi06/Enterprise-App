@@ -4,12 +4,14 @@ import be.ehb.enterpriseapp.products.models.ProductDTO;
 import be.ehb.enterpriseapp.products.services.ProductService;
 import be.ehb.enterpriseapp.products.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api")
 public class ProductController {
     
     @Autowired
